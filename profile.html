@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ملفي الشخصي | Connect+</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="topbar">
+    <h1>Connect<span>+</span></h1>
+    <nav>
+        <a href="index.html">الرئيسية</a>
+        <a href="chat.html">المحادثات</a>
+    </nav>
+</header>
+
+<main class="container">
+    <section class="profile-card">
+        <div class="profile-avatar">👤</div>
+        <h2 id="profileName">مستخدم Connect+</h2>
+        <p>مرحبا بيك في ملفك الشخصي.</p>
+
+        <button onclick="changeName()">تغيير الاسم</button>
+        <button onclick="logout()">تسجيل الخروج</button>
+    </section>
+</main>
+
+<script>
+function displayProfile() {
+    const name = localStorage.getItem("connectplus_name") || "مستخدم Connect+";
+    document.getElementById("profileName").textContent = name;
+}
+
+function changeName() {
+    const name = prompt("اكتب الاسم الجديد:");
+
+    if (name && name.trim().length >= 2) {
+        localStorage.setItem("connectplus_name", name.trim());
+        displayProfile();
+    }
+}
+
+function logout() {
+    localStorage.removeItem("connectplus_name");
+    window.location.href = "login.html";
+}
+
+displayProfile();
+</script>
+
+</body>
+</html>
