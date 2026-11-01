@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المحادثات | Connect+</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="topbar">
+    <h1>Connect<span>+</span></h1>
+    <a href="index.html">الرئيسية</a>
+</header>
+
+<main class="container">
+    <section class="card">
+        <h2>💬 المحادثات</h2>
+        <p>هذه محادثة تجريبية على نفس الجهاز.</p>
+
+        <div id="messages"></div>
+
+        <input id="messageInput" type="text" placeholder="اكتب رسالة...">
+        <button onclick="sendMessage()">إرسال</button>
+    </section>
+</main>
+
+<script>
+function getMessages() {
+    return JSON.parse(localStorage.getItem("connectplus_messages") || "[]");
+}
+
+function displayMessages() {
+    const box = document.getElementById("messages");
+    box.innerHTML = "";
+
+    getMessages().forEach(message => {
+        const item = document.createElement("div");
+        item.className = "post";
+
+        const name = document.createElement("strong");
+        name.textContent = message.name;
+
+        const text = document.createElement("p");
+        text.textContent = message.text;
+
+        item.appendChild(name);
+        item.appendChild(text);
+        box.appendChild(item);
+    });
+}
+
+function sendMessage() {
+    const input = document.getElementById("messageInput");
+    const text = input.value.trim();
+
+    if (!text) return;
+
+    const messages = getMessages();
+
+    messages.push({
+        name: localStorage.getItem("connectplus_name") || "زائر",
+        text: text
+    });
+
+    localStorage.setItem("connectplus_messages", JSON.stringify(messages));
+
+    input.value = "";
+    displayMessages();
+}
+
+displayMessages();
+</script>
+
+</body>
+</html>
