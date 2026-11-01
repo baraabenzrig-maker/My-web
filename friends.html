@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الأصدقاء | Connect+</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="topbar">
+    <h1>Connect<span>+</span></h1>
+    <nav>
+        <a href="index.html">الرئيسية</a>
+        <a href="chat.html">المحادثات</a>
+    </nav>
+</header>
+
+<main class="container">
+    <section class="card">
+        <h2>👥 الأصدقاء</h2>
+        <p>قائمة تجريبية للأصدقاء.</p>
+
+        <input id="friendName" type="text" placeholder="اكتب اسم صديقك">
+        <button onclick="addFriend()">إضافة صديق</button>
+
+        <div id="friendList"></div>
+    </section>
+</main>
+
+<script>
+function getFriends() {
+    return JSON.parse(localStorage.getItem("connectplus_friends") || "[]");
+}
+
+function showFriends() {
+    const list = document.getElementById("friendList");
+    list.innerHTML = "";
+
+    getFriends().forEach(friend => {
+        const item = document.createElement("div");
+        item.className = "post";
+        item.textContent = "👤 " + friend;
+        list.appendChild(item);
+    });
+}
+
+function addFriend() {
+    const input = document.getElementById("friendName");
+    const name = input.value.trim();
+
+    if (!name) {
+        alert("اكتب اسم الصديق.");
+        return;
+    }
+
+    const friends = getFriends();
+
+    if (friends.includes(name)) {
+        alert("الصديق موجود بالفعل.");
+        return;
+    }
+
+    friends.push(name);
+    localStorage.setItem("connectplus_friends", JSON.stringify(friends));
+
+    input.value = "";
+    showFriends();
+}
+
+showFriends();
+</script>
+
+</body>
+</html>
