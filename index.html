@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connect+ | الصفحة الرئيسية</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="topbar">
+    <h1>Connect<span>+</span></h1>
+    <nav>
+        <a href="index.html">الرئيسية</a>
+        <a href="friends.html">الأصدقاء</a>
+        <a href="chat.html">المحادثات</a>
+        <a href="profile.html">ملفي</a>
+    </nav>
+</header>
+
+<main class="container">
+    <section class="welcome">
+        <h2>مرحبا بيك في Connect+ 👋</h2>
+        <p>منصة واحدة للتواصل والمشاركة مع أصحابك.</p>
+    </section>
+
+    <section class="card">
+        <h2>شنوّة تحب تشارك اليوم؟</h2>
+        <textarea id="postText" placeholder="اكتب منشورك هنا..."></textarea>
+        <button onclick="addPost()">نشر المنشور</button>
+    </section>
+
+    <section>
+        <h2>آخر المنشورات</h2>
+        <div id="posts"></div>
+    </section>
+</main>
+
+<script src="app.js"></script>
+</body>
+</html>
